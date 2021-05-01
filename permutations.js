@@ -33,3 +33,32 @@ const getPermutations = (array) => {
 }
 
 console.log(getPermutations([4, 3, 2, 1]));
+
+// Other algorithm (https://stackoverflow.com/questions/39927452/recursively-print-all-permutations-of-a-string-javascript)
+
+const findPermutations = (string) => {
+  if (string.length < 2) {
+    return string;
+  }
+
+  let results = [];
+
+  for (let i = 0; i < string.length; i++) {
+    let letter = string[i];
+
+    if (string.indexOf(letter) !== i) {
+      continue;
+    }
+
+    let remaining = string.slice(0, i) + string.slice(i + 1, string.length)
+
+    for (let permutation of findPermutations(remaining)){
+      results.push(letter + permutation);
+    }
+  }
+
+  return results;
+
+}
+
+console.log(findPermutations("abc"));
