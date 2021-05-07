@@ -31,4 +31,23 @@ var searchInsert = function(nums, target) {
   return firstIndex;
 }
 
+// Recursive solution
+let findTarget = (array, target, left, right) => {
+    let midpoint = left + ((right - left) / 2)
+    if (target === array[midpoint]) {
+      return midpoint;
+    } else if (right === left) {
+      if (target > array[right]) {
+        return right + 1;
+      } else {
+        return left;
+      }
+    } else if (target > array[midpoint]) {
+      return findTarget(array, target, midpoint + 1, right);
+    } else if (target < array[midpoint]) {
+      return findTarget(array, target, left, midpoint - 1);
+    }
+  }
 
+  arr = [1, 2, 3, 4, 6, 7, 8]
+  console.log(findTarget(arr, 5, 0, arr.length - 1))
